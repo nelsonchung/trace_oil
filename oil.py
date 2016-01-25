@@ -24,6 +24,6 @@ print "Oil Low: "+(q('#ctl00_ContentPlaceMain1_LabelLowPriceValue').text())
 #print yahoo.get_trade_datetime()
 #yahoo.refresh()
 
-stock = Stock('00642U')
-print stock.moving_average(5)
+#stock = Stock('00642U')
+#print stock.moving_average(5)
 
