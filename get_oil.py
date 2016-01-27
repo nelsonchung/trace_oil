@@ -3,7 +3,7 @@
 import requests
 from pyquery import PyQuery as pq
 #from yahoo_finance import Share
-from grs import Stock
+#from grs import Stock
 
 url_oil="http://www.plus500.com/zh/Instruments/CL"
 
