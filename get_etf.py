@@ -1,6 +1,9 @@
+#今天抓到昨天的淨值與市值
 
 import requests
 from pyquery import PyQuery as pq
+import time
+import datetime
 
 etf_number="00642U"
 url_oil="http://www.moneydj.com/ETF/X/Basic/Basic0003.xdjhtm?etfid="+etf_number+".TW"
@@ -15,10 +18,12 @@ r = requests.get(url_oil)
 #print r.text 
 #print r.text.decode('utf-8') 
 
+#Save html
 data = open('data.html', 'w')
 data.write(r.text.encode('utf-8'))
 data.close()
 
+#Get value
 #ctl00_ctl00_MainContent_MainContent_stable
 url_pq_result = pq(url_oil)
 #print "Test data: "+(url_pq_result('#ctl00_ctl00_MainContent_MainContent_stable').text())
@@ -37,3 +42,9 @@ print market_value
 worth_value = td('td').eq(worthvalue_index).text()
 worth_value = worth_value[0: worth_value.find(split_str)]
 print worth_value
+
+#Get date
+t = time.time()
+#datetime.datetime.fromtimestamp(t).strftime('%Y-%m-%d %H:%M:%S')
+print datetime.datetime.fromtimestamp(t).strftime('%Y/%m/%d')
+
