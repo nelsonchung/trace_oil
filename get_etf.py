@@ -13,7 +13,7 @@ sys.setdefaultencoding('utf-8')
 r = requests.get(url_oil)
 #r = requests.post(url_oil)
 #print r.text 
-print r.text.decode('utf-8') 
+#print r.text.decode('utf-8') 
 
 data = open('data.html', 'w')
 data.write(r.text.encode('utf-8'))
@@ -21,10 +21,19 @@ data.close()
 
 #ctl00_ctl00_MainContent_MainContent_stable
 url_pq_result = pq(url_oil)
-print "Test data: "+(url_pq_result('#ctl00_ctl00_MainContent_MainContent_stable').text())
+#print "Test data: "+(url_pq_result('#ctl00_ctl00_MainContent_MainContent_stable').text())
 
 #url_etf_value = pq(url_pq_result('#ctl00_ctl00_MainContent_MainContent_stable').text())
 #td = url_etf_value('td')
 td = url_pq_result('table')
-for i in td:
-        print url_pq_result(i).text()
+market_index=8
+worthvalue_index=14
+split_str="("
+print "============================"
+
+market_value = td('td').eq(market_index).text()
+market_value = market_value[0: market_value.find(split_str)]
+print market_value 
+worth_value = td('td').eq(worthvalue_index).text()
+worth_value = worth_value[0: worth_value.find(split_str)]
+print worth_value
