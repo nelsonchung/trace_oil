@@ -12,9 +12,10 @@ r = requests.get(url_oil)
 #print r.text 
 
 q = pq(url_oil)
-print "Oil Now: "+(q('#ctl00_ContentPlaceMain1_LabelBuyPriceBig').text())
-print "Oil High:"+(q('#ctl00_ContentPlaceMain1_LabelHighPriceValue').text())
-print "Oil Low: "+(q('#ctl00_ContentPlaceMain1_LabelLowPriceValue').text())
+#print "Oil Now: "+(q('#ctl00_ContentPlaceMain1_LabelBuyPriceBig').text())
+#print "Oil High:"+(q('#ctl00_ContentPlaceMain1_LabelHighPriceValue').text())
+#print "Oil Low: "+(q('#ctl00_ContentPlaceMain1_LabelLowPriceValue').text())
+print q('#ctl00_ContentPlaceMain1_LabelBuyPriceBig').text()
 
 
 

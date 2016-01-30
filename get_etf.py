@@ -1,9 +1,7 @@
-#今天抓到昨天的淨值與市值
-
+#We just get the actual(yesterday) value today
 import requests
 from pyquery import PyQuery as pq
-import time
-import datetime
+from datetime import date, timedelta
 
 etf_number="00642U"
 url_oil="http://www.moneydj.com/ETF/X/Basic/Basic0003.xdjhtm?etfid="+etf_number+".TW"
@@ -34,17 +32,23 @@ td = url_pq_result('table')
 market_index=8
 worthvalue_index=14
 split_str="("
-print "============================"
 
 market_value = td('td').eq(market_index).text()
 market_value = market_value[0: market_value.find(split_str)]
-print market_value 
+#print market_value 
 worth_value = td('td').eq(worthvalue_index).text()
 worth_value = worth_value[0: worth_value.find(split_str)]
-print worth_value
+#print worth_value
 
 #Get date
-t = time.time()
+#import time
+#import datetime
+#t = time.time()
+##data sample code
 #datetime.datetime.fromtimestamp(t).strftime('%Y-%m-%d %H:%M:%S')
-print datetime.datetime.fromtimestamp(t).strftime('%Y/%m/%d')
+#print datetime.datetime.fromtimestamp(t).strftime('%Y/%m/%d')
+
+#Print final information
+yesterday = date.today() - timedelta(1)
+print yesterday.strftime('%Y/%m/%d') + "  " + worth_value + "   " + market_value
 
