@@ -13,7 +13,7 @@ do
     #echo "Now time is $HOUR:$MINUTE $DAY_OF_WEEK"
     #echo "Alert time is $HOUR_RUN:$MINUTE_RUN "
 
-    if [ "$DAY_OF_WEEK" == "1" ] || [ "$DAY_OF_WEEK" == "2" ] || [ "$DAY_OF_WEEK" == "3" ] || [ "$DAY_OF_WEEK" == "4" ] || [ "$DAY_OF_WEEK" == "5" ] ; then
+    #if [ "$DAY_OF_WEEK" == "1" ] || [ "$DAY_OF_WEEK" == "2" ] || [ "$DAY_OF_WEEK" == "3" ] || [ "$DAY_OF_WEEK" == "4" ] || [ "$DAY_OF_WEEK" == "5" ] ; then
         if [ "$HOUR" == "$HOUR_RUN_ETF" ] && [ "$MINUTE" == "$MINUTE_RUN_ETF" ]; then
             etf_value=`python get_etf.py`
         fi
@@ -22,6 +22,6 @@ do
             shift=" "
             sed '2i $etf_value $shift $oil_value' -i data.txt
         fi
-    fi
+    #fi
     sleep 60
 done
