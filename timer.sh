@@ -19,8 +19,7 @@ do
         fi
         if [ "$HOUR" == "$HOUR_RUN_OIL" ] && [ "$MINUTE" == "$MINUTE_RUN_OIL" ]; then
             oil_value=`python get_oil.py`
-            shift=" "
-            sed '2i $etf_value $shift $oil_value' -i data.txt
+            sed '2i '"${etf_value}  ${oil_value}" -i data.txt
         fi
     #fi
     sleep 60
