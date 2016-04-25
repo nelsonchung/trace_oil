@@ -2,6 +2,7 @@
 import requests
 from pyquery import PyQuery as pq
 from datetime import date, timedelta
+import httplib, urllib
 
 etf_number="00642U"
 url_oil="http://www.moneydj.com/ETF/X/Basic/Basic0003.xdjhtm?etfid="+etf_number+".TW"
@@ -47,6 +48,24 @@ worth_value = worth_value[0: worth_value.find(split_str)]
 ##data sample code
 #datetime.datetime.fromtimestamp(t).strftime('%Y-%m-%d %H:%M:%S')
 #print datetime.datetime.fromtimestamp(t).strftime('%Y/%m/%d')
+
+#Sync information to ThingSpeak
+params = urllib.urlencode({'field1': worth_value, 'field2': market_value, 'key':'9P9ETYQIZPAW0948'})
+headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
+conn = httplib.HTTPConnection("api.thingspeak.com:80")
+#conn = httplib.HTTPConnection("api.thingspeak.com/channels/111185")
+	
+try:
+	conn.request("POST", "/update", params, headers)
+	response = conn.getresponse()
+	print worth_value
+	print market_value
+	print strftime("%a, %d %b %Y %H:%M:%S", localtime())
+	print response.status, response.reason
+	data = response.read()
+	conn.close()
+except:
+	print "connection failed"	
 
 #Print final information
 yesterday = date.today() - timedelta(1)

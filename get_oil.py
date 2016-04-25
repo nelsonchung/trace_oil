@@ -15,8 +15,26 @@ q = pq(url_oil)
 #print "Oil Now: "+(q('#ctl00_ContentPlaceMain1_LabelBuyPriceBig').text())
 #print "Oil High:"+(q('#ctl00_ContentPlaceMain1_LabelHighPriceValue').text())
 #print "Oil Low: "+(q('#ctl00_ContentPlaceMain1_LabelLowPriceValue').text())
-print q('#ctl00_ContentPlaceMain1_LabelBuyPriceBig').text()
+oil_price = q('#ctl00_ContentPlaceMain1_LabelBuyPriceBig').text()
+print oil_price
 
+
+#Sync information to ThingSpeak
+params = urllib.urlencode({'field3': oil_price, 'key':'9P9ETYQIZPAW0948'})
+headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
+conn = httplib.HTTPConnection("api.thingspeak.com:80")
+	
+try:
+	conn.request("POST", "/update", params, headers)
+	response = conn.getresponse()
+	print worth_value
+	print market_value
+	print strftime("%a, %d %b %Y %H:%M:%S", localtime())
+	print response.status, response.reason
+	data = response.read()
+	conn.close()
+except:
+	print "connection failed"	
 
 
 #yahoo = Share('YHOO')
