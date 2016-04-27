@@ -4,6 +4,7 @@ import requests
 from pyquery import PyQuery as pq
 #from yahoo_finance import Share
 #from grs import Stock
+import httplib, urllib
 
 url_oil="http://www.plus500.com/zh/Instruments/CL"
 
@@ -27,14 +28,14 @@ conn = httplib.HTTPConnection("api.thingspeak.com:80")
 try:
 	conn.request("POST", "/update", params, headers)
 	response = conn.getresponse()
-	print worth_value
-	print market_value
-	print strftime("%a, %d %b %Y %H:%M:%S", localtime())
-	print response.status, response.reason
+#print oil_price
+#print response.status, response.reason
+#print strftime("%a, %d %b %Y %H:%M:%S", localtime())
 	data = response.read()
 	conn.close()
 except:
-	print "connection failed"	
+	conn.close()
+#print "connection failed"	
 
 
 #yahoo = Share('YHOO')
