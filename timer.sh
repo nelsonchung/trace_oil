@@ -4,6 +4,8 @@ HOUR_RUN_ETF=06
 MINUTE_RUN_ETF=00
 HOUR_RUN_OIL=06
 MINUTE_RUN_OIL=01
+HOUR_COMMIT=09
+MINUTE_COMMIT=24
 #echo $DATE
 
 while [ 1 ]
@@ -25,6 +27,11 @@ do
             oil_value=`python get_oil.py`
             echo $oil_value
             sed '2i '"${etf_value}  ${oil_value}" -i data.txt
+        fi
+        if [ "$HOUR" == "$HOUR_COMMIT" ] && [ "$MINUTE" == "$MINUTE_COMMIT" ]; then
+            echo "Run git commit and git push"
+            git commit data.txt -m "Update oil information"
+            git push
         fi
     #fi
     sleep 60
