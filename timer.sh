@@ -4,8 +4,8 @@ HOUR_RUN_ETF=06
 MINUTE_RUN_ETF=00
 HOUR_RUN_OIL=06
 MINUTE_RUN_OIL=01
-HOUR_COMMIT=09
-MINUTE_COMMIT=24
+HOUR_COMMIT=08
+MINUTE_COMMIT=30
 #echo $DATE
 
 while [ 1 ]
@@ -22,11 +22,16 @@ do
         if [ "$HOUR" == "$HOUR_RUN_ETF" ] && [ "$MINUTE" == "$MINUTE_RUN_ETF" ]; then
             etf_value=`python get_etf.py`
             echo $etf_value
+            #for golden
+            etf_golden_value=`python get_etf_golden.py`
+            echo $etf_golden_value
         fi
         if [ "$HOUR" == "$HOUR_RUN_OIL" ] && [ "$MINUTE" == "$MINUTE_RUN_OIL" ]; then
             oil_value=`python get_oil.py`
             echo $oil_value
             sed '2i '"${etf_value}  ${oil_value}" -i data.txt
+            #for golden
+            sed '2i '"${etf_golden_value}" -i data_golden.txt
         fi
         if [ "$HOUR" == "$HOUR_COMMIT" ] && [ "$MINUTE" == "$MINUTE_COMMIT" ]; then
             echo "Run git commit and git push"
