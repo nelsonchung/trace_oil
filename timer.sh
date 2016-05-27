@@ -35,7 +35,8 @@ do
         fi
         if [ "$HOUR" == "$HOUR_COMMIT" ] && [ "$MINUTE" == "$MINUTE_COMMIT" ]; then
             echo "Run git commit and git push"
-            git commit data.txt -m "Update oil information - 日期 淨值 市值 原油價格: ${etf_value} ${oil_value}"
+            commit_log="Update oil information - 日期 淨值 市值 原油價格: ${etf_value} ${oil_value}"
+            git commit data.txt -m ${commit_log} 
             git push
         fi
     #fi
